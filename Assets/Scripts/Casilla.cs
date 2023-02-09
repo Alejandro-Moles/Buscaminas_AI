@@ -8,17 +8,32 @@ public class Casilla : MonoBehaviour
     public int posx, posy;
     public bool isBomb;
 
+    
+
+    private MapGenerator mapGenerator;
+
+
+    private void Start()
+    {
+        mapGenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
+    }
+
 
     private void OnMouseDown()
     {
-        if (isBomb)
+        if (!mapGenerator.islose)
         {
-            Debug.Log("BOOOOOOOOOOOOOOOOOOOOOBA");
-            GetComponent<SpriteRenderer>().color = Color.red;
+            if (isBomb)
+            {
+                mapGenerator.TerminarPartida();
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                mapGenerator.contadorGanar++;
+                transform.Find("casilla_txt").GetComponent<TextMeshPro>().text = MapGenerator.instance.GetBombsAround(posx, posy).ToString();
+            }
         }
-        else
-        {
-            transform.Find("casilla_txt").GetComponent<TextMeshPro>().text = MapGenerator.instance.GetBombsAround(posx,posy).ToString();
-        }
+        
     }
 }
