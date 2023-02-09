@@ -7,8 +7,7 @@ public class Casilla : MonoBehaviour
 {
     public int posx, posy;
     public bool isBomb;
-
-    
+    public bool ispointed = false;
 
     private MapGenerator mapGenerator;
 
@@ -21,6 +20,7 @@ public class Casilla : MonoBehaviour
 
     private void OnMouseDown()
     {
+
         if (!mapGenerator.islose)
         {
             if (isBomb)
@@ -30,8 +30,13 @@ public class Casilla : MonoBehaviour
             }
             else
             {
-                mapGenerator.contadorGanar++;
                 transform.Find("casilla_txt").GetComponent<TextMeshPro>().text = MapGenerator.instance.GetBombsAround(posx, posy).ToString();
+                if (!ispointed)
+                {
+                    mapGenerator.contadorGanar++;
+                    ispointed = true;
+                    mapGenerator.puntuacion++;
+                }
             }
         }
         
