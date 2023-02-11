@@ -17,12 +17,35 @@ public class Casilla : MonoBehaviour
         mapGenerator = GameObject.FindGameObjectWithTag("Map").GetComponent<MapGenerator>();
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            mapGenerator.colocarBandera = true;
+            mapGenerator.ModoBanderaOn();
+            
+        }
+    }
+
 
     private void OnMouseDown()
     {
+        if(mapGenerator.colocarBandera) 
+        {
+            ClickBandera();
+        }
+        else
+        {
+            Click();
+        }
+    }
 
+    private void Click()
+    {
         if (!mapGenerator.islose)
         {
+            GetComponent<SpriteRenderer>().color = Color.white;
+
             if (isBomb)
             {
                 mapGenerator.TerminarPartida();
@@ -37,8 +60,20 @@ public class Casilla : MonoBehaviour
                     ispointed = true;
                     mapGenerator.puntuacion++;
                 }
+
             }
         }
-        
     }
+
+    private void ClickBandera()
+    {
+        mapGenerator.colocarBandera = false;
+        mapGenerator.ModoBanderaOff();
+        if (!mapGenerator.islose)
+        {
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+    }
+
+    
 }

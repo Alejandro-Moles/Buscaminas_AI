@@ -37,6 +37,9 @@ public class MapGenerator : MonoBehaviour
 
     //variable que nos indica la puntuacion
     public int puntuacion = 0;
+
+    public bool colocarBandera = false;
+    public GameObject ImageBamdera;
     #endregion
 
     #region Metodos Unity
@@ -232,6 +235,16 @@ public class MapGenerator : MonoBehaviour
         PanelDerrota.SetActive(false);
         PanelUI.SetActive(true);
         PanelJuego.SetActive(false);
+    }
+
+    public void ModoBanderaOn()
+    {
+        ImageBamdera.SetActive(true);
+    }
+
+    public void ModoBanderaOff()
+    {
+        ImageBamdera.SetActive(false);
     }
     #endregion
 }
