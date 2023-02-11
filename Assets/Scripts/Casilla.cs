@@ -19,9 +19,11 @@ public class Casilla : MonoBehaviour
 
     private void Update()
     {
+        //si se le da al click derecho cambiamos al modo bandera
         if (Input.GetMouseButton(1))
         {
             mapGenerator.colocarBandera = true;
+            //activamos la imagen para que el jugador sepa que esta en ese modo
             mapGenerator.ModoBanderaOn();
             
         }
@@ -30,6 +32,7 @@ public class Casilla : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //si esta activado el modo bandera ejecutamos otra funcion distinta
         if(mapGenerator.colocarBandera) 
         {
             ClickBandera();
@@ -40,6 +43,7 @@ public class Casilla : MonoBehaviour
         }
     }
 
+    //funcion que hace el click en la casilla y comprueba si hay bomba o no
     private void Click()
     {
         if (!mapGenerator.islose)
@@ -65,6 +69,7 @@ public class Casilla : MonoBehaviour
         }
     }
 
+    //funcion que pone la "bandera" en la casilla cliqueada
     private void ClickBandera()
     {
         mapGenerator.colocarBandera = false;
